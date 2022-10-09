@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager instance;
+    public Text playerName;    
+    public Input nameText;
+    public GameObject player;
+    public PlayerController getSet;
 
-    private void Awake()
+    private void Start()
     {
-        if (MainManager.instance == null)
-        {
-            MainManager.instance = this;
-            DontDestroyOnLoad(gameObject);
-        } else
-        {
-            Destroy(gameObject);
-        }
+        player = GameObject.Find("Player");
+        getSet = player.GetComponent<PlayerController>();        
+        
     }
-
+    private void Update()
+    {
+        playerName.text = "Speed: " + getSet.Speed + " Player Name: " + DataManager.Instance.PlayerName; 
+    }
 }
